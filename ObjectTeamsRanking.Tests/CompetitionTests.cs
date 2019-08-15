@@ -14,6 +14,15 @@ namespace ObjectTeamsRanking.Tests
         }
 
         [Fact]
+        public void GetClasificationWhenTeamsShouldReturnCurrentClasification()
+        {
+            string[,] teamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(teamList);
+
+            Assert.Equal(teamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
         public void EqualsWhenCompetitionsAreEqualShouldReturnTrue()
         {
             string[,] teamList = { { "Team 1", "12" }, { "Team 2", "10" } };
