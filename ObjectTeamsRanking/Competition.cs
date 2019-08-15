@@ -6,9 +6,20 @@ namespace ObjectTeamsRanking
     {
         private readonly Team[] teams;
 
-        public Competition(int numberOfTeams)
+        public Competition(string[,] teamList)
         {
+            int numberOfTeams = 0;
+            if (teamList != null)
+            {
+                numberOfTeams = teamList.GetLength(0);
+            }
+
             this.teams = new Team[numberOfTeams];
+        }
+
+        public string[,] GetClasification()
+        {
+            return null;
         }
 
         private void BubbleSort()
