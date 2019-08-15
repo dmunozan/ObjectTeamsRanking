@@ -22,5 +22,16 @@ namespace ObjectTeamsRanking.Tests
 
             Assert.True(initialCompetition.Equals(competitionToCompare));
         }
+
+        [Fact]
+        public void EqualsWhenCompetitionsAreNotEqualShouldReturnFalse()
+        {
+            string[,] initialteamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(initialteamList);
+            string[,] teamListToCompare = { { "Team 1", "12" }, { "Team 2", "11" } };
+            Competition competitionToCompare = new Competition(teamListToCompare);
+
+            Assert.False(initialCompetition.Equals(competitionToCompare));
+        }
     }
 }
