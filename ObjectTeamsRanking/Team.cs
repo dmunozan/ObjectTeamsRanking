@@ -18,14 +18,9 @@ namespace ObjectTeamsRanking
             return this.points < that.points;
         }
 
-        public void PrintName()
+        public string[] GetTeamDetails()
         {
-            Console.Write(this.name);
-        }
-
-        public void PrintPoints()
-        {
-            Console.Write(this.points);
+            return new[] { name, points.ToString() };
         }
     }
 }
