@@ -2,7 +2,7 @@
 
 namespace ObjectTeamsRanking
 {
-    class Team
+    public class Team
     {
         private readonly string name;
         private readonly int points;
@@ -15,6 +15,11 @@ namespace ObjectTeamsRanking
 
         public bool HasLessPoints(Team that)
         {
+            if (that == null)
+            {
+                throw new ArgumentNullException(nameof(that));
+            }
+
             return this.points < that.points;
         }
 

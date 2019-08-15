@@ -2,7 +2,7 @@
 
 namespace ObjectTeamsRanking
 {
-    class Competition
+    public class Competition
     {
         private readonly Team[] teams;
 
