@@ -6,9 +6,12 @@ namespace ObjectTeamsRanking.Tests
     public class CompetitionTests
     {
         [Fact]
-        public void Test1()
+        public void GetClasificationWhenNoTeamsShouldReturnNull()
         {
+            Competition initialCompetition = new Competition(null);
 
+            Assert.Null(initialCompetition.GetClasification());
         }
+
     }
 }
