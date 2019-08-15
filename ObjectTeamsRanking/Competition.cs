@@ -24,7 +24,24 @@ namespace ObjectTeamsRanking
 
         public string[,] GetClasification()
         {
-            return null;
+            const int TeamName = 0;
+            const int TeamPoints = 1;
+            const int DetailsPerTeam = 2;
+            if (this.teams.Length == 0)
+            {
+                return null;
+            }
+
+            string[,] clasification = new string[this.teams.Length, DetailsPerTeam];
+
+            for (int i = 0; i < this.teams.Length; i++)
+            {
+                string[] teamDetails = this.teams[i].GetTeamDetails();
+                clasification[i, TeamName] = teamDetails[TeamName];
+                clasification[i, TeamPoints] = teamDetails[TeamPoints];
+            }
+
+            return clasification;
         }
 
         public override bool Equals(object obj)
