@@ -15,11 +15,37 @@ namespace ObjectTeamsRanking
             }
 
             this.teams = new Team[numberOfTeams];
+
+            for (int i = 0; teamList != null && i < numberOfTeams; i++)
+            {
+                this.teams[i] = new Team(teamList[i, 0], Convert.ToInt32(teamList[i, 1]));
+            }
         }
 
         public string[,] GetClasification()
         {
             return null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            Competition other = obj as Competition;
+
+            if (other == null || this.teams.Length != other.teams.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < this.teams.Length; i++)
+            {
+                if (this.teams[i].GetTeamDetails()[0] != other.teams[i].GetTeamDetails()[0] ||
+                    this.teams[i].GetTeamDetails()[1] != other.teams[i].GetTeamDetails()[1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void BubbleSort()
