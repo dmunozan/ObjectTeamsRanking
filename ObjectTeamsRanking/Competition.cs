@@ -4,7 +4,7 @@ namespace ObjectTeamsRanking
 {
     public class Competition
     {
-        private readonly Team[] teams;
+        private Team[] teams;
 
         public Competition(string[,] teamList)
         {
@@ -26,7 +26,29 @@ namespace ObjectTeamsRanking
 
         public void AddTeam(string[,] teamList)
         {
-            Console.WriteLine(teamList);
+            if (teamList == null || teamList.Length == 0)
+            {
+                return;
+            }
+
+            int numberOfTeamsToAdd = teamList.GetLength(0);
+            int currentNumberOfTeams = this.teams.Length;
+
+            Team[] newTeams = new Team[currentNumberOfTeams + numberOfTeamsToAdd];
+
+            for (int i = 0; i < currentNumberOfTeams; i++)
+            {
+                newTeams[i] = this.teams[i];
+            }
+
+            for (int j = 0; j < numberOfTeamsToAdd; j++)
+            {
+                newTeams[j + currentNumberOfTeams] = new Team(teamList[j, 0], Convert.ToInt32(teamList[j, 1]));
+            }
+
+            this.teams = newTeams;
+
+            BubbleSort();
         }
 
         public string[,] GetClasification()
