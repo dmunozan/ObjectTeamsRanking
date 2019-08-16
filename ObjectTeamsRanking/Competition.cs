@@ -87,7 +87,32 @@ namespace ObjectTeamsRanking
 
         public void AddMatch(string[,] matchList)
         {
-            Console.WriteLine(matchList);
+            const int TeamName = 0;
+            const int TeamPoints = 1;
+
+            if (matchList == null || matchList.Length == 0)
+            {
+                return;
+            }
+
+            int numberOfMatchesToAdd = matchList.GetLength(0);
+            int currentNumberOfTeams = this.teams.Length;
+
+            for (int i = 0; i < numberOfMatchesToAdd; i++)
+            {
+                for (int j = 0; j < currentNumberOfTeams; j++)
+                {
+                    string[] teamDetails = this.teams[j].GetTeamDetails();
+                    if (teamDetails[TeamName] == matchList[i, TeamName])
+                    {
+                        int currentPoints = Convert.ToInt32(teamDetails[TeamPoints]);
+                        int matchPoints = Convert.ToInt32(matchList[i, TeamPoints]);
+                        this.teams[j] = new Team(teamDetails[TeamName], currentPoints + matchPoints);
+                    }
+                }
+            }
+
+            BubbleSort();
         }
 
         private void BubbleSort()
