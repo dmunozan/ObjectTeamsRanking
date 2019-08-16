@@ -20,6 +20,13 @@ namespace ObjectTeamsRanking
             {
                 this.teams[i] = new Team(teamList[i, 0], Convert.ToInt32(teamList[i, 1]));
             }
+
+            BubbleSort();
+        }
+
+        public void AddTeam(string[,] teamList)
+        {
+            Console.WriteLine(teamList);
         }
 
         public string[,] GetClasification()
