@@ -61,6 +61,29 @@ namespace ObjectTeamsRanking.Tests
         }
 
         [Fact]
+        public void AddMatchWhenEmptyShouldDoNothing()
+        {
+            string[,] teamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(teamList);
+            string[,] matchList = { { } };
+            initialCompetition.AddTeam(matchList);
+
+            Assert.Equal(teamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
+        public void AddMatchWhenOneMatchShouldIncreaseTeamPointsAndSortClasification()
+        {
+            string[,] finalTeamList = { { "Team 2", "13" }, { "Team 1", "12" } };
+            string[,] initialTeamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(initialTeamList);
+            string[,] matchListToAdd = { { "Team 2", "3" } };
+            initialCompetition.AddMatch(matchListToAdd);
+
+            Assert.Equal(finalTeamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
         public void GetClasificationWhenNoTeamsShouldReturnNull()
         {
             Competition initialCompetition = new Competition(null);
