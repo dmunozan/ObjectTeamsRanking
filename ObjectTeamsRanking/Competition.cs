@@ -85,6 +85,11 @@ namespace ObjectTeamsRanking
             return true;
         }
 
+        public void AddMatch(string[,] matchList)
+        {
+            Console.WriteLine(matchList);
+        }
+
         private void BubbleSort()
         {
             bool isSorted = false;
