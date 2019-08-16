@@ -6,6 +6,16 @@ namespace ObjectTeamsRanking.Tests
     public class CompetitionTests
     {
         [Fact]
+        public void AddTeamWhenNullShouldDoNothing()
+        {
+            string[,] teamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(teamList);
+            initialCompetition.AddTeam(null);
+
+            Assert.Equal(teamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
         public void GetClasificationWhenNoTeamsShouldReturnNull()
         {
             Competition initialCompetition = new Competition(null);
