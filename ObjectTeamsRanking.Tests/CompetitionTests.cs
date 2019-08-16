@@ -16,6 +16,29 @@ namespace ObjectTeamsRanking.Tests
         }
 
         [Fact]
+        public void AddTeamWhenEmptyShouldDoNothing()
+        {
+            string[,] teamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(teamList);
+            string[,] teamListToAdd = { { } };
+            initialCompetition.AddTeam(teamListToAdd);
+
+            Assert.Equal(teamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
+        public void AddTeamWhenTeamsShouldAddTeamsAndSortClasification()
+        {
+            string[,] finalTeamList = { { "Team 1", "12" }, { "Team 3", "11" }, { "Team 2", "10" } };
+            string[,] initialTeamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(initialTeamList);
+            string[,] teamListToAdd = { { "Team 3", "11" } };
+            initialCompetition.AddTeam(teamListToAdd);
+
+            Assert.Equal(finalTeamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
         public void GetClasificationWhenNoTeamsShouldReturnNull()
         {
             Competition initialCompetition = new Competition(null);
