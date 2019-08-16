@@ -8,20 +8,11 @@ namespace ObjectTeamsRanking
 
         public Competition(string[,] teamList)
         {
-            int numberOfTeams = 0;
-            if (teamList != null)
-            {
-                numberOfTeams = teamList.GetLength(0);
-            }
+            const int InitialnumberOfTeams = 0;
 
-            this.teams = new Team[numberOfTeams];
+            this.teams = new Team[InitialnumberOfTeams];
 
-            for (int i = 0; teamList != null && i < numberOfTeams; i++)
-            {
-                this.teams[i] = new Team(teamList[i, 0], Convert.ToInt32(teamList[i, 1]));
-            }
-
-            BubbleSort();
+            this.AddTeam(teamList);
         }
 
         public void AddTeam(string[,] teamList)
