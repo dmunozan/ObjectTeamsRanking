@@ -17,27 +17,41 @@ namespace ObjectTeamsRanking
 
         public void AddTeam(string[,] teamList)
         {
+            const int TeamName = 0;
+            const int TeamPoints = 1;
+
             if (teamList == null || teamList.Length == 0)
             {
                 return;
             }
 
             int numberOfTeamsToAdd = teamList.GetLength(0);
+            int numberOfNotRepeatedTeams = 0;
             int currentNumberOfTeams = this.teams.Length;
 
-            Team[] newTeams = new Team[currentNumberOfTeams + numberOfTeamsToAdd];
+            Team[] newTeams = new Team[numberOfTeamsToAdd];
 
-            for (int i = 0; i < currentNumberOfTeams; i++)
+            for (int i = 0; i < numberOfTeamsToAdd; i++)
             {
-                newTeams[i] = this.teams[i];
+                bool isOnTheList = false;
+                for (int j = 0; !isOnTheList && j < currentNumberOfTeams; j++)
+                {
+                    isOnTheList = this.teams[j].GetTeamDetails()[TeamName] == teamList[i, TeamName];
+                }
+
+                if (!isOnTheList)
+                {
+                    newTeams[i] = new Team(teamList[i, TeamName], Convert.ToInt32(teamList[i, TeamPoints]));
+                    numberOfNotRepeatedTeams++;
+                }
             }
 
-            for (int j = 0; j < numberOfTeamsToAdd; j++)
-            {
-                newTeams[j + currentNumberOfTeams] = new Team(teamList[j, 0], Convert.ToInt32(teamList[j, 1]));
-            }
+            Team[] totalTeams = new Team[currentNumberOfTeams + numberOfNotRepeatedTeams];
 
-            this.teams = newTeams;
+            this.teams.CopyTo(totalTeams, 0);
+            Array.Copy(newTeams, 0, totalTeams, currentNumberOfTeams, numberOfNotRepeatedTeams);
+
+            this.teams = totalTeams;
 
             BubbleSort();
         }
