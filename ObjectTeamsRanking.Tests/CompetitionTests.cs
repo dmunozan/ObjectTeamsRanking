@@ -108,6 +108,18 @@ namespace ObjectTeamsRanking.Tests
         }
 
         [Fact]
+        public void AddMatchWhenTeamNoExistsShouldIgnoreItAddTheOtherMatchesAndSortClasification()
+        {
+            string[,] finalTeamList = { { "Team 1", "12" }, { "Team 3", "11" }, { "Team 2", "10" } };
+            string[,] initialTeamList = { { "Team 1", "12" }, { "Team 2", "10" }, { "Team 3", "8" } };
+            Competition initialCompetition = new Competition(initialTeamList);
+            string[,] matchListToAdd = { { "Team 3", "3" }, { "Team 4", "3" } };
+            initialCompetition.AddMatch(matchListToAdd);
+
+            Assert.Equal(finalTeamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
         public void GetClasificationWhenNoTeamsShouldReturnNull()
         {
             Competition initialCompetition = new Competition(null);
