@@ -51,6 +51,18 @@ namespace ObjectTeamsRanking.Tests
         }
 
         [Fact]
+        public void AddTeamWhenTeamAlreadyExistsShouldIgnoreItAddTheOtherTeamsAndSortClasification()
+        {
+            string[,] finalTeamList = { { "Team 1", "12" }, { "Team 3", "11" }, { "Team 2", "10" } };
+            string[,] initialTeamList = { { "Team 1", "12" }, { "Team 2", "10" } };
+            Competition initialCompetition = new Competition(initialTeamList);
+            string[,] teamListToAdd = { { "Team 3", "11" }, { "Team 2", "8" } };
+            initialCompetition.AddTeam(teamListToAdd);
+
+            Assert.Equal(finalTeamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
         public void AddMatchWhenNullShouldDoNothing()
         {
             string[,] teamList = { { "Team 1", "12" }, { "Team 2", "10" } };
@@ -78,6 +90,18 @@ namespace ObjectTeamsRanking.Tests
             string[,] initialTeamList = { { "Team 1", "12" }, { "Team 2", "10" } };
             Competition initialCompetition = new Competition(initialTeamList);
             string[,] matchListToAdd = { { "Team 2", "3" } };
+            initialCompetition.AddMatch(matchListToAdd);
+
+            Assert.Equal(finalTeamList, initialCompetition.GetClasification());
+        }
+
+        [Fact]
+        public void AddMatchWhenMoreThanOneMatchShouldIncreaseTeamsPointsAndSortClasification()
+        {
+            string[,] finalTeamList = { { "Team 3", "12" }, { "Team 1", "11" }, { "Team 2", "11" }, { "Team 4", "8" } };
+            string[,] initialTeamList = { { "Team 1", "11" }, { "Team 2", "10" }, { "Team 3", "9" }, { "Team 4", "7" } };
+            Competition initialCompetition = new Competition(initialTeamList);
+            string[,] matchListToAdd = { { "Team 2", "1" }, { "Team 3", "3" }, { "Team 4", "1" } };
             initialCompetition.AddMatch(matchListToAdd);
 
             Assert.Equal(finalTeamList, initialCompetition.GetClasification());
